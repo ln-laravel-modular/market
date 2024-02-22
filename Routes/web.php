@@ -11,6 +11,6 @@
 |
 */
 
-Route::prefix('market')->group(function () {
-    Route::get('/', 'MarketController@view_index');
-});
+// Route::prefix('market')->group(function () {
+//     Route::get('/', 'MarketController@view_index');
+// });
