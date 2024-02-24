@@ -1,4 +1,4 @@
-@extends('market::_layouts.web')
+@extends('market::layouts.web')
 
 @section('content')
   <!-- Main content -->

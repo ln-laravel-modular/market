@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Config;
 
-class MarketController extends Controller
+class MarketController extends \App\Http\Controllers\Controller
 {
     use ViewTrait;
     /**
@@ -83,6 +83,32 @@ trait ViewTrait
 {
     function view_index(Request $request)
     {
-        return view('market::index', ['module_config' => Config::get('market')]);
+        return self::view('market::index');
+    }
+    function view_admin_modules(Request $request)
+    {
+        return self::view('market::admin.modules');
+    }
+}
+
+trait InstallProgressTrait
+{
+    function install_progress(Request $request)
+    {
+    }
+    function install_progress_of_intro(Request $request)
+    {
+    }
+    function install_progress_of_config(Request $request)
+    {
+    }
+    function install_progress_of_table(Request $request)
+    {
+    }
+    function install_progress_of_data(Request $request)
+    {
+    }
+    function install_progress_of_result(Request $request)
+    {
     }
 }
