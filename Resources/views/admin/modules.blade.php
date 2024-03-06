@@ -84,10 +84,10 @@
             </div>
 
             <div class="list-group list-group-flush">
-              <a href="/admin/module-market/temp" class="list-group-item list-group-item-action"> Temp </a>
-              <a href="/admin/module-market/admin" class="list-group-item list-group-item-action"> Admin </a>
-              <a href="/admin/module-market/adminlte" class="list-group-item list-group-item-action"> AdminLTE </a>
-              <a href="/admin/module-market/webstack" class="list-group-item list-group-item-action"> WebStack </a>
+              <a href="/admin/market/modules/temp" class="list-group-item list-group-item-action"> Temp </a>
+              <a href="/admin/market/modules/admin" class="list-group-item list-group-item-action"> Admin </a>
+              <a href="/admin/market/modules/adminlte" class="list-group-item list-group-item-action"> AdminLTE </a>
+              <a href="/admin/market/modules/webstack" class="list-group-item list-group-item-action"> WebStack </a>
             </div>
 
           </div>

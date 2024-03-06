@@ -6,14 +6,15 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">{{ Config::get($slug . '.name') }}</h1>
+          <h1 class="m-0">{{ Config::get($module . '.name') }}</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item active">应用管理</li>
             <li class="breadcrumb-item"><a href="/admin/module-market">应用市场</a></li>
             <li class="breadcrumb-item"><a
-                href="/admin/module-market/{{ Config::get($slug . '.slug') }}">{{ Config::get($slug . '.name') }}</a></li>
+                href="/admin/module-market/{{ Config::get($module . '.module') }}">{{ Config::get($module . '.name') }}</a>
+            </li>
             <li class="breadcrumb-item active">Install</li>
           </ol>
         </div><!-- /.col -->
@@ -58,7 +59,7 @@
           </div>
         </div>
       </div>
-      @include($slug . '::install')
+      @include($module . '::install')
     </div>
   </section>
   <!-- /.content -->

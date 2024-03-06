@@ -24,7 +24,9 @@ Route::prefix(ModuleHelper::current_config('web.prefix'))->group(function () {
 
 Route::prefix(ModuleHelper::current_config('admin.prefix'))->group(function () {
     Route::prefix(ModuleHelper::current_config('web.prefix'))->group(function () {
-        Route::get('/modules', "MarketController@view_admin_modules");
+        Route::get('', "MarketController@view_index");
+        Route::get('/{module}', "MarketController@view_admin_modules_intro");
+        Route::get('/{module}/install', "MarketController@view_admin_modules_install");
         Route::get('/installed', "MarketController@view_admin_installed");
     });
 });

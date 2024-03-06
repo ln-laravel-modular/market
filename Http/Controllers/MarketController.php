@@ -6,10 +6,11 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Config;
+use Modules\Admin\Http\Controllers\AdminController;
 
 class MarketController extends \App\Http\Controllers\Controller
 {
-    use ViewTrait;
+    use StaticTrait, ViewTrait;
     /**
      * Display a listing of the resource.
      * @return Renderable
@@ -79,15 +80,30 @@ class MarketController extends \App\Http\Controllers\Controller
         //
     }
 }
+trait StaticTrait
+{
+    public static function admin_view($view = null, $data = [], $mergeData = [])
+    {
+        return AdminController::view($view, $data, $mergeData);
+    }
+}
 trait ViewTrait
 {
     function view_index(Request $request)
     {
-        return self::view('market::index');
+        return self::admin_view('market::index');
     }
     function view_admin_modules(Request $request)
     {
-        return self::view('market::admin.modules');
+        return self::admin_view('market::admin.modules');
+    }
+    function view_admin_modules_intro(Request $request, $module)
+    {
+        return self::admin_view('market::module.intro', ['module' => $module]);
+    }
+    function view_admin_modules_install(Request $request, $module)
+    {
+        return self::admin_view('market::module.install', ['module' => $module]);
     }
 }
 

@@ -13,10 +13,7 @@ return [
         'prefix' => 'admin',
         'navbar' => [],
         'sidebar' => [
-            ["path" => "/market", "title" => "应用管理", "icon" => "fab fa-microsoft", "slug" => "",  "children" => [
-                ["path" => "/modules", "title" => "应用市场"],
-                ["path" => "/installed", "title" => "安装管理"],
-            ]],
+            ["path" => "/market", "title" => "应用市场", "icon" => "fab fa-microsoft", "slug" => "",  "children" => []],
         ],
     ],
 ];
