@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 
 
 Route::prefix(ModuleHelper::current_config('web.prefix'))->group(function () {
+    Route::get('', "MarketController@view_index");
 });
 
 Route::prefix(ModuleHelper::current_config('admin.prefix'))->group(function () {
