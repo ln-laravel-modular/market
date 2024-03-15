@@ -28,6 +28,10 @@ class MarketServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+        $this->commands([
+            \Modules\Market\Console\Commands\Package\PackageRefreshCommand::class,
+            \Modules\Market\Console\Commands\Template\TemplateMakeCommand::class,
+        ]);
     }
 
     /**
@@ -51,7 +55,8 @@ class MarketServiceProvider extends ServiceProvider
             module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower
+            module_path($this->moduleName, 'Config/config.php'),
+            $this->moduleNameLower
         );
     }
 
