@@ -25,7 +25,7 @@ return [
             "type" => "package",
             "tags" => ["search", "paginator"],
             "form" => [
-                ["name" => "search", "type" => "input"]
+                ["name" => "search", "type" => "input", "default" => "bootstrap"]
             ],
             "request_project_list" => [
                 "url" => "http://api.jsdelivr.com/v1/jsdelivr/libraries?name=*{{\$search}}*",
@@ -89,8 +89,10 @@ return [
             "name" => "BootCDN",
             "slug" => "bootcdn",
             "ico" => "https://api.bootcdn.cn/assets/ico/favicon.ico",
+            "host" => "",
             "request_project_list" => [
                 "url" => "http://api.jsdelivr.com/v1/jsdelivr/libraries?name=*{{\$search}}*",
+                "response_type" => "array",
                 "response_keys" => [
                     "name" => "",
                     "description" => "",
@@ -100,5 +102,32 @@ return [
                 "url" => "https://api.bootcdn.cn/libraries/{{\$name}}",
             ],
         ],
+        'github' => [
+            "name" => "GitHub",
+            "slug" => "github",
+            'ico' => 'https://docs.github.com/assets/cb-345/images/site/favicon.png',
+            "host" => "http://api.github.com",
+            "request_project_list" => [
+                "url" => "http://api.github.com/orgs/ln-laravel-modular/repos",
+                "headers" => ["Accept: application/vnd.github+json"],
+                "response_type" => "array",
+                "response_keys" => [
+                    "name" => "name",
+                    "description" => "description",
+                ],
+            ],
+            "request_version_list" => [
+                "url" => "http://api.github.com/repos/ln-laravel-modular/{{\$name}}/branches",
+                "response_type" => "array",
+                "response_keys" => [
+                    "name" => "name",
+                    //     "description" => "description",
+                    "versions" => "",
+                ],
+            ],
+        ],
+
     ],
+    'themes' => [],
+    "examples" => [],
 ];

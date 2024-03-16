@@ -101,6 +101,15 @@ class MarketAdminController extends \Modules\Admin\Http\Controllers\AdminControl
     {
         // $return = $request->all();
         $return['projects_installed'] = json_decode(app('files')->get('public\\vendor\\packages.lock'), true);
+        $return['themes'] = array_filter(Http::get("http://api.github.com/repos/ln-laravel-modular/theme-packages/branches")->json(), function ($item) {
+            return !in_array($item['name'], ['master', 'empty', 'develop']);
+        });
+        $return['examples'] = array_filter(Http::get("http://api.github.com/repos/ln-laravel-modular/example-packages/branches")->json(), function ($item) {
+            return !in_array($item['name'], ['master', 'empty', 'develop']);
+        });
+        $return['modules'] = array_filter(Http::get("http://api.github.com/orgs/ln-laravel-modular/repos")->json(), function ($item) {
+            return !in_array($item['name'], ['ln-laravel-modular', 'example-packages', 'theme-packages']);
+        });
         if ($request->filled('from')) {
             $form = $request->input('from');
             Arr::set($return, 'http', []);
@@ -113,12 +122,12 @@ class MarketAdminController extends \Modules\Admin\Http\Controllers\AdminControl
                 $method = "request_project_list";
                 $urlKey = "projects";
             }
-            Arr::set($return, 'http.method', $method);
+            Arr::set($return, 'http.key', $method);
             Arr::set($return, 'http.url', $url = str_replace([
                 "{{\$search}}",
                 "{{\$name}}",
             ], [
-                $request->input('search', 'jquery'),
+                $request->input('search', 'bootstrap'),
                 $request->input('name',),
             ], Arr::get($branch, $method . '.url', '')));
             if (!empty($url)) Arr::set($return, 'http.response', $return[$urlKey] = Http::get(Arr::get($return, 'http.url'))->json());
@@ -134,17 +143,17 @@ class MarketAdminController extends \Modules\Admin\Http\Controllers\AdminControl
                 case 'array':
                     $return[$urlKey] = array_map(function ($item) use ($branch, $method) {
                         $res = [];
-                        foreach (Arr::get($branch, $method . '.response_keys', []) as $result_key => $response_key) {
+                        foreach (Arr::get($branch, $method . '.response_keys') ?? [] as $result_key => $response_key) {
                             // var_dump([$key, $response_key]);
                             if (empty($response_key)) continue;
                             $res[$result_key] = $item[$response_key];
                         }
                         return $res;
-                    }, $return[$urlKey]);
+                    }, $return[$urlKey] ?? []);
                     break;
                 case 'object':
                     $res = [];
-                    foreach (Arr::get($branch, $method . '.response_keys') as $result_key => $response_key) {
+                    foreach (Arr::get($branch, $method . '.response_keys') ?? [] as $result_key => $response_key) {
                         // var_dump([$key, $response_key]);
                         if (empty($response_key)) continue;
                         $res[$result_key] = $return[$urlKey][$response_key];

@@ -5,6 +5,9 @@
 
     @empty(request()->input('from'))
       <div class="row">
+        <div class="col-md-12">
+          <h3 class="mb-1">CDNs</h3>
+        </div>
         @foreach ($moduleConfig['branches'] ?? [] as $branch)
           @if (($branch['hidden'] ?? false) == false)
             <div class="col-md-3 col-sm-6 col-12">
@@ -22,6 +25,60 @@
             </div>
             <!-- /.col -->
           @endif
+        @endforeach
+        <div class="col-md-12">
+          <h3 class="mb-1">Modules</h3>
+        </div>
+        @foreach ($modules ?? [] as $module)
+          <div class="col-md-3 col-sm-6 col-12">
+            <div class="card">
+              <div class="card-header">{{ $module['name'] }}</div>
+              <svg class="bd-placeholder-img card-img-bottom" width="100%" height="120"
+                xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap"
+                preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#6c757d"></rect>
+                {{-- <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text> --}}
+              </svg>
+            </div>
+          </div>
+          <!-- /.col -->
+        @endforeach
+        <div class="col-md-12">
+          <h3 class="mb-1">Themes</h3>
+        </div>
+        @foreach ($themes ?? [] as $theme)
+          <div class="col-md-3 col-sm-6 col-12">
+            <div class="card">
+              <div class="card-header">{{ $theme['name'] }}</div>
+              <svg class="bd-placeholder-img card-img-bottom" width="100%" height="120"
+                xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap"
+                preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#6c757d"></rect>
+                {{-- <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text> --}}
+              </svg>
+            </div>
+          </div>
+          <!-- /.col -->
+        @endforeach
+        <div class="col-md-12">
+          <h3 class="mb-1">Examples</h3>
+        </div>
+        @foreach ($examples ?? [] as $example)
+          <div class="col-md-3 col-sm-6 col-12">
+            <div class="card">
+              <div class="card-header">{{ $example['name'] }}</div>
+              <svg class="bd-placeholder-img card-img-bottom" width="100%" height="120"
+                xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap"
+                preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#6c757d"></rect>
+                {{-- <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text> --}}
+              </svg>
+            </div>
+          </div>
+          <!-- /.col -->
         @endforeach
       </div>
     @else
@@ -62,9 +119,9 @@
           <div class="row mb-2">
             <div class="col-md-12">
               <div class="jumbotron mb-2">
-                <h1 class="display-4">{{ $versions['name'] }}</h1>
+                <h1 class="display-4">{{ $versions['name'] ?? '' }}</h1>
                 <hr class="my-4">
-                <p>{{ $versions['description'] }}</p>
+                <p>{{ $versions['description'] ?? '' }}</p>
               </div>
             </div>
           </div>
@@ -77,6 +134,11 @@
                 @endforeach
                 <div class="input-group">
                   <select class="form-control" name="version">
+                    @php
+                      if (!empty($versions['versions']) && !is_array($versions['versions'])) {
+                          $versions['versions'] = (array) $versions['versions'];
+                      }
+                    @endphp
                     @foreach ($versions['versions'] ?? [] as $version)
                       <option value="{{ $version }}" @if (request()->input('version') == $version) selected @endif>
                         {{ $version }}
