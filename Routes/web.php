@@ -1,6 +1,7 @@
 <?php
 
 use App\Support\Helpers\ModuleHelper;
+use App\Support\Module;
 use Illuminate\Http\Request;
 
 /*
@@ -19,12 +20,12 @@ use Illuminate\Http\Request;
 // });
 
 
-Route::prefix(ModuleHelper::current_config('web.prefix'))->group(function () {
+Route::prefix(Module::currentConfig('web.prefix'))->group(function () {
     Route::get('', "MarketController@view_index");
 });
 
-Route::prefix(ModuleHelper::current_config('admin.prefix'))->group(function () {
-    Route::prefix(ModuleHelper::current_config('web.prefix'))->group(function () {
+Route::prefix(Module::currentConfig('admin.prefix'))->group(function () {
+    Route::prefix(Module::currentConfig('web.prefix'))->group(function () {
         Route::get('', "MarketController@view_index");
         Route::get('/{module}', "MarketController@view_admin_modules_intro");
         Route::get('/{module}/install', "MarketController@view_admin_modules_install");
