@@ -91,7 +91,8 @@ trait ViewTrait
 {
     function view_index(Request $request)
     {
-        return self::admin_view('market::index');
+        $return = ['view' => 'index'];
+        return $this->view($return);
     }
     function view_admin_modules(Request $request)
     {

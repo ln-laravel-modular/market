@@ -2,7 +2,6 @@
 
 namespace Modules\Market\Http\Controllers;
 
-use App\Support\Arr;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -13,6 +12,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use wapmorgan\UnifiedArchive\UnifiedArchive;
 
@@ -111,7 +111,7 @@ class MarketAdminController extends \Modules\Admin\Http\Controllers\AdminControl
             return !in_array($item['name'], ['ln-laravel-modular', 'example-packages', 'theme-packages']);
         });
         if ($request->filled('from')) {
-            $form = $request->input('from');
+            $from = $request->input('from');
             Arr::set($return, 'http', []);
             $return['branch'] = $branch = Arr::get($return, "moduleConfig.branches." . $request->input('from'));
             if ($request->filled('name')) {
@@ -166,7 +166,7 @@ class MarketAdminController extends \Modules\Admin\Http\Controllers\AdminControl
         }
 
 
-        return self::view($return['view'], $return);
+        return $this->view($return['view'], $return);
     }
 }
 

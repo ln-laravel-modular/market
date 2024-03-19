@@ -5,6 +5,7 @@ return [
     'slug' => "market",
     'title' => "Market",
     'prefix' => 'market',
+    'layout' => "master",
     'web' => [
         'component' => '',
         'navbar' => [],
