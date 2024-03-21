@@ -10,7 +10,12 @@ class MarketContent extends Model
     use HasFactory;
 
     protected $fillable = [];
-    
+
+
+    protected $casts = [
+        'text' => 'array',
+    ];
+
     protected static function newFactory()
     {
         return \Modules\Market\Database\factories\MarketContentFactory::new();

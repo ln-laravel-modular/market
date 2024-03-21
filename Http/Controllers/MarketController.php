@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Config;
 use Modules\Admin\Http\Controllers\AdminController;
+use Modules\Market\Models\MarketContent;
+use Modules\Market\Support\Market;
 
 class MarketController extends \App\Http\Controllers\Controller
 {
@@ -91,7 +93,12 @@ trait ViewTrait
 {
     function view_index(Request $request)
     {
-        $return = ['view' => 'index'];
+        $return = [
+            'view' => 'index',
+            'moduleProjects' => MarketContent::where([['type', 'module-project']])->paginate(),
+            'exampleProjects' => MarketContent::where([['type', 'example-project']])->paginate(),
+            'themeProjects' => MarketContent::where([['type', 'theme-project']])->paginate(),
+        ];
         return $this->view($return);
     }
     function view_admin_modules(Request $request)

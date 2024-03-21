@@ -14,8 +14,11 @@ class MarketDatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Model::unguard();
+        // Model::unguard();
 
         // $this->call("OthersTableSeeder");
+        $this->call([
+            \Modules\Market\Database\Seeders\MarketContentsTableSeeder::class,
+        ]);
     }
 }
