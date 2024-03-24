@@ -45,6 +45,6 @@ class CreateMarketContentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(ModuleHelper::current_config('db_prefix') . '_contents');
+        Schema::dropIfExists(Module::currentConfig('table.prefix') . '_contents');
     }
 }

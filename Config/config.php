@@ -13,9 +13,9 @@ return [
     'admin' => [
         'prefix' => 'admin',
         'navbar' => [],
-        'sidebar' => [
-            ["path" => "/market", "title" => "应用市场", "icon" => "fab fa-microsoft", "slug" => "", "order" => PHP_INT_MAX - 3,  "children" => []],
-        ],
+        // 'sidebar' => [
+        //     ["path" => "/market", "title" => "应用市场", "icon" => "fab fa-microsoft", "slug" => "", "order" => PHP_INT_MAX - 3,  "children" => []],
+        // ],
     ],
     'branches' => [
         // 'empty' => [],
